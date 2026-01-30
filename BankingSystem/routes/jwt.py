@@ -34,8 +34,6 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 
     return UserResponse(
         id=created_user.id,
-        name=created_user.name,
-        surname=created_user.surname,
         email=created_user.email,
         role=created_user.role,
         full_name=created_user.full_name()
