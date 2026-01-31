@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from models.user import User
 from models.account import Account
 from security.security import get_password_hash, verify_password
+from schemas.user import UserResponse
 
 
 class UserService:
@@ -15,7 +16,10 @@ class UserService:
         return self.db.query(User).filter(User.email == email).first()
 
     def delete_user(self, user_id: int):
-        return self.db.delete(self.get_by_id(user_id))
+        
+        self.db.query(User).filter(User.id == user_id).delete()
+        self.db.commit()
+
 
     def create_user(self, data):
         user = User(
@@ -23,12 +27,13 @@ class UserService:
             surname=data.surname,
             email=data.email,
             hashed_password=get_password_hash(data.password),
-            role=data.role
+            role=data.role,
+            initial_balance = data.initial_balance
         )
         self.db.add(user)
         self.db.flush()
 
-        account = Account(user_id=user.id, _balance=0.0)
+        account = Account(user_id=user.id, _balance=user.initial_balance)
         self.db.add(account)
 
         self.db.commit()
@@ -44,4 +49,5 @@ class UserService:
         return user
 
     def get_all_users(self):
-        return self.db.query(User).all()
+        user = self.db.query(User).all()
+        return user

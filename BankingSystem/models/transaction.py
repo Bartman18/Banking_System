@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship, DeclarativeBase
 
-from BankingSystem.models.enums import TransactionType
-from BankingSystem.db.base import Base
+from models.enums import TransactionType
+from db.base import Base
 
 
 class Transaction(Base):

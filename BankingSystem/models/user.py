@@ -3,8 +3,8 @@ from sqlalchemy.orm import relationship, DeclarativeBase
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
-from BankingSystem.models.enums import UserRole
-from BankingSystem.db.base import Base
+from models.enums import UserRole
+from db.base import Base
 
 
 class User(Base):
@@ -16,6 +16,7 @@ class User(Base):
     email = Column(String)
     hashed_password = Column(String)
     role = Column(Enum(UserRole))
+    initial_balance = Column(Float, default=0)
 
     def full_name(self):
         return self.name + ' ' + self.surname

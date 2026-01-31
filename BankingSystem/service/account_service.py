@@ -70,6 +70,12 @@ class AccountService:
         account = self.get_account(account_id)
         return self.db.query(Transaction).filter(Transaction.account_id == account_id).order_by(
             Transaction.transaction_date).all()
+    
+    def all_transaction(self):
+        return self.db.query(Transaction).order_by(
+            Transaction.transaction_date).all()
+    
+
 
     def create_account(self, user_id: int) -> Account:
         account = Account(user_id=user_id, _balance=0.0)

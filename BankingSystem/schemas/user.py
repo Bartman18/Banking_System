@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
-from BankingSystem.models.enums import UserRole
+from models.enums import UserRole
 
 
 
@@ -11,12 +11,11 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     role: UserRole = UserRole.CUSTOMER
+    initial_balance:float
 
 
 class UserResponse(BaseModel):
     id: int
-    name: str
-    surname: str
     email: EmailStr
     role: UserRole
     full_name: str

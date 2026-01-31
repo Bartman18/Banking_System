@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum, Float
 from sqlalchemy.orm import relationship, DeclarativeBase
-from BankingSystem.db.base import Base
+from db.base import Base
 
 class Account(Base):
     __tablename__ = 'account'
