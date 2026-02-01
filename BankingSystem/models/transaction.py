@@ -13,6 +13,7 @@ class Transaction(Base):
     amount = Column(Integer, nullable=False)
     transaction_type = Column(Enum(TransactionType), nullable=False)
 
+    account = relationship("Account", backref="transactions")
     def __repr__(self):
         return f"Transaction(id={self.id}, type={self.transaction_type.name}, amount={self.amount})"
 

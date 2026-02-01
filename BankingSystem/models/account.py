@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum, Float
-from sqlalchemy.orm import relationship, DeclarativeBase
+from sqlalchemy.orm import relationship
+
 from db.base import Base
 
 class Account(Base):
@@ -9,6 +10,7 @@ class Account(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     _balance = Column(Float, default=0)
 
+    user = relationship("User", backref="accounts")
     def __repr__(self):
         return f"Account(id={self.id}, user_id={self.user_id}, balance={self.balance})"
 
