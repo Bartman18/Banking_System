@@ -11,8 +11,6 @@ class UserCreate(BaseModel):
     initial_balance: float
 
 
-
-
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
