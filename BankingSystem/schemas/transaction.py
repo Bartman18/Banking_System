@@ -1,17 +1,18 @@
 from pydantic import BaseModel, ConfigDict
 from datetime import datetime
-from BankingSystem.models.enums import TransactionType
+from models.enums import TransactionType
 
 
 class TransactionCreate(BaseModel):
     amount: float
-    type: TransactionType
-
-
-class TransactionOut(TransactionCreate):
-    id: int
     account_id: int
-    timestamp: datetime
+    type: TransactionType
+    transaction_date: datetime
 
 
-
+class TransactionOut(BaseModel):
+    id: int
+    amount: float
+    user_name: str
+    transaction_type: TransactionType
+    transaction_date: datetime
