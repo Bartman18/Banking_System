@@ -1,5 +1,6 @@
 from service.user_service import UserService
-
+import pytest
+from security.exception import UserNotFound, InvalidAmount, UserAlreadyExists
 
 class TestUserService:
 
@@ -28,10 +29,21 @@ class TestUserService:
 
         assert email is not None
 
-    def test_delete_user(self, db_session, user_data):
+    
+    def test_delete_user_error(self,db_session,test_user):
         service = UserService(db_session)
-        user = service.create_user(user_data)
 
-        service.delete_user(user.id)
+        with pytest.raises(UserNotFound):
+             service.delete_user(test_user.id+1)
 
-        assert service.get_by_id(user.id) is None
+
+    def test_create_user_error_invalid_balanace(self,db_session,user_invalid_balance):
+        service  = UserService(db_session)
+        with pytest.raises(InvalidAmount):
+            service.create_user(user_invalid_balance)
+
+
+    def test_create_user_error_user_exist(self,db_session,test_user, user_data):
+        service  = UserService(db_session)
+        with pytest.raises(UserAlreadyExists):
+            service.create_user(user_data)
