@@ -45,6 +45,18 @@ def user_data():
 
 
 @pytest.fixture
+def user_invalid_balance():
+    return UserCreate(
+        name="Test",
+        surname="Nazwisko",
+        email="test@example.com",
+        password="test123",
+        role=UserRole.CUSTOMER,
+        initial_balance=-10,
+    )
+
+
+@pytest.fixture
 def test_user(db_session):
     user = User(
         name="Test",
