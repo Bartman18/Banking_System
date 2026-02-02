@@ -13,6 +13,7 @@ class TransactionCreate(BaseModel):
 class TransactionOut(BaseModel):
     id: int
     amount: float
-    user_name: str
+    account_id:int
+    # user_name: str
     transaction_type: TransactionType
     transaction_date: datetime
