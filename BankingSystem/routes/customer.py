@@ -43,11 +43,11 @@ def transaction_history(db: Session = Depends(get_db), user: User = Depends(requ
         transactions_out = [
             TransactionOut(
                 id=t.id,
-                # account_id=t.account_id,
+                account_id=t.account_id,
                 amount=t.amount,
                 transaction_type=t.transaction_type,
                 transaction_date=t.transaction_date,
-                user_name=t.account.user.full_name()
+                # user_name=t.account.user.full_name()
             )
             for t in transactions
         ]
